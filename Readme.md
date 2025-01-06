@@ -7,7 +7,7 @@ Single-Cell Signature Explorer is a package of four softwares dedicated to high 
 
  A video how to use this set of softwares is available as supplemental data in Nucleic Acid Research website.  How to install softwares and packages to use the Viewer & Combiner on windows is now available on [youtube](https://youtu.be/cnFc_NJBfzo). Please note that this video covers the installation of R, Rstudio, Rtools, that are not supported by us.
 
-Single-Cell Signature Explorer is directly compatible with Single-Cell Virtual Cytometer , Single-cell Multilayer Viewer and [Single-Cell Spatial Explorer](https://github.com/FredPont/spatial) .
+Single-Cell Signature Explorer is directly compatible with [Single-Cell  Virtual  Cytometer](https://sites.google.com/u/0/d/1xKJ0wBSr69I8lvvRqGGPlH0U5YtTZJ8_/p/1nQfeSUAxIUnuNmmKembxlpgg4dnT5bpu/preview) , [Single-cell Multilayer Viewer](https://sites.google.com/u/0/d/1xKJ0wBSr69I8lvvRqGGPlH0U5YtTZJ8_/p/1Fa7npFgAtOL7EKl0-Juti9hs9Htd9XFm/preview) and [Single-Cell Spatial Explorer](https://github.com/FredPont/spatial) .
 
 
 # Pipeline
@@ -27,29 +27,29 @@ If you enjoy using Single-Cell Signature Explorer and find it useful, then pleas
 ![NAR](doc/images/NAR.jpg)
 
 # Features 
-High throughput scores computation (see fig 2-3)
++ High throughput scores computation (see fig 2-3)
 
-Scores can be computed on a basic computer or a supercomputer as well (see benchmark fig 2 and 3)
++ Scores can be computed on a basic computer or a supercomputer as well (see benchmark fig 2 and 3)
 
-Work out of the box : no installation for the scorer and the merger developed using a high performance compiled programming language.
++ Work out of the box : no installation for the scorer and the merger developed using a high performance compiled programming language.
 
-Conda environment  and [video](https://www.youtube.com/watch?v=cnFc_NJBfzo) for easy installation of the Viewer/Combiner
++ Conda environment  and [video](https://www.youtube.com/watch?v=cnFc_NJBfzo) for easy installation of the Viewer/Combiner
 
-No complex command lines : copy the data and start the software
++ No complex command lines : copy the data and start the software
 
-Already automated for thousands of pathways 
++ Already automated for thousands of pathways 
 
-Ready to use pathway [database](https://sites.google.com/site/fredsoftwares/products/databases) with >30,000 human pathways
++ Ready to use pathway [database](https://sites.google.com/site/fredsoftwares/products/databases) with >35,000 human pathways
 
-Easy use of custom pathways (see doc)
++ Easy use of custom pathways (see doc)
 
-Can distinguish inhibitor/activator genes in custom pathways (see doc)
++ Can distinguish inhibitor/activator genes in custom pathways (see doc)
 
-No data alteration : the user can use the latest normalization/noise reduction algorithm during data pre-processing
++ No data alteration : the user can use the latest normalization/noise reduction algorithm during data pre-processing
 
-Scores manually validated and heavily tested by experienced biologists/immunologists on a large amount of data using antibodies, purified cells. (see publication supp data)
++ Scores manually validated and heavily tested by experienced biologists/immunologists on a large amount of data using antibodies, purified cells. (see publication supp data)
 
-Step-by-step documentation of 17 pages, continuously improved to cover the user's questions. 
++ Step-by-step documentation of 17 pages, continuously improved to cover the user's questions. 
 
 ![MAP](doc/images/map.jpg)
 Figure 1.  KEGG Signature "Antigen Processing and Presentation" (89 genes) displayed on a t-SNE plot of 13,500 human peripheral blood mononuclear cells by Single-Cell Signature Viewer.
