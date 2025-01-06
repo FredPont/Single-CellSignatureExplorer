@@ -1,0 +1,144 @@
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+// Written by Frederic PONT.
+//(c) Frederic Pont 2018
+
+package fileUtil
+
+import (
+	"ScorerLowMem/src/userTypes"
+	"bufio"
+	"encoding/csv"
+	"fmt"
+	"io"
+	"log"
+	"math"
+	"os"
+	"strconv"
+	"strings"
+)
+
+// calcTable compute the number of final tables to produce
+func CalcTable(nbPW, colMax int) int {
+	// when colMax == 0 only one final table is produced
+	if colMax == 0 || colMax > nbPW {
+		return 1
+	}
+
+	// +1 to include cell names in first column of the table
+	if nbPW%(colMax-1) == 0 {
+		return int(float64(nbPW) / float64(colMax-1))
+	}
+
+	return int(math.Ceil(float64(nbPW) / float64(colMax-1)))
+
+}
+
+// compute the start-end row to read to fill one table
+// for example [pw1-pw10], [pw11-pw20]...
+func RowBlocks(allPWnames []string, tableNB, colMax int) [][]string {
+	var pwBlocks [][]string
+
+	nbPW := len(allPWnames)
+	if colMax == 0 {
+		colMax = nbPW + 1
+	}
+	lastBloc := nbPW % (colMax - 1) // because one more row is needed for cell names
+	lim := 0
+	idx := 0
+	for i := 1; i <= tableNB; i++ {
+		if i < tableNB || lastBloc == 0 {
+			lim = colMax
+		} else {
+			lim = lastBloc + 1 // +1 because j < lim does not include the last pathway
+		}
+
+		var tmp []string
+		for j := 1; j < lim; j++ {
+			tmp = append(tmp, allPWnames[idx])
+			idx++
+		}
+		pwBlocks = append(pwBlocks, tmp)
+	}
+	return pwBlocks
+}
+
+func WriteMerge(allPWnames []string, tmpdir, resFile string, conf userTypes.CONF) error {
+	nbPW := len(allPWnames)
+	colMax := conf.ResSze
+	tableNB := CalcTable(nbPW, colMax)
+	pwBlocks := RowBlocks(allPWnames, tableNB, colMax)
+
+	for i := 0; i < tableNB; i++ {
+		f, _ := remExt(resFile)
+		path := f + "_" + strconv.Itoa(i) + ".csv"
+		file, err := os.Create(path)
+		if err != nil {
+			return err
+		}
+		defer file.Close()
+		fmt.Println("write", path)
+
+		w := bufio.NewWriter(file)
+		fmt.Fprintln(w, tabHeader(pwBlocks[i]))
+
+		tmpfiles := ListFiles(tmpdir)
+
+		for _, f := range tmpfiles {
+			pwscores := readTmp(tmpdir + f)
+			cellname := f
+			row := []string{cellname}
+			for _, pw := range pwBlocks[i] { // get each pw of a blocks of pw
+				row = append(row, pwscores[pw])
+			}
+			line := strings.Join(row, "\t")
+			fmt.Fprintln(w, line)
+		}
+		w.Flush()
+	}
+
+	return nil
+}
+
+// read one tmp file into a map  {pw => score}
+func readTmp(path string) map[string]string {
+	pwscores := make(map[string]string, 0)
+
+	csvFile, err := os.Open(path)
+	check(err)
+	defer csvFile.Close()
+	reader := csv.NewReader(bufio.NewReader(csvFile))
+
+	reader.FieldsPerRecord = 2
+	reader.Comma = '\t'
+
+	for {
+		line, error := reader.Read()
+		if error == io.EOF {
+			break
+		} else if error != nil {
+			log.Fatal(error)
+		}
+		pwname, _ := remExt(line[0])
+		pwscores[pwname] = line[1]
+
+	}
+
+	return pwscores
+}
+
+// create table header
+func tabHeader(pwnames []string) string {
+	return "id\t" + strings.Join(pwnames, "\t")
+}
