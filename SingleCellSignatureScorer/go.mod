@@ -1,6 +1,6 @@
 module scorer
 
-go 1.24.3
+go 1.24.5
 
 require (
 	github.com/schollz/progressbar v1.0.0
