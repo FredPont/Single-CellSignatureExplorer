@@ -1,6 +1,0 @@
-$ wc -l results/merge.csv
-518593 results/merge.csv
-$ wc -l data/t1.tsv
-129649 data/t1.tsv
-wc -l results/merge.csv 
-1037185 results/merge.csv
