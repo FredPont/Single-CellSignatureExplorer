@@ -1,6 +1,8 @@
 
 # Single-Cell Signature Explorer
 
+2025-07-30 : **New** !  Major update of the signature Scorer (see Benchmarks and doc)
+
 see also this [page](https://sites.google.com/site/fredsoftwares/products/single-cell-signature-explorer)
 
 Single-Cell Signature Explorer is a package of four softwares dedicated to high throughput signature exploration in single-cell RNAseq analysis. Single-Cell Signature Explorer  is fully compatible with [Single-Cell  Virtual  Cytometer](https://sites.google.com/u/0/d/1xKJ0wBSr69I8lvvRqGGPlH0U5YtTZJ8_/p/1nQfeSUAxIUnuNmmKembxlpgg4dnT5bpu/preview) and [Single-cell Multilayer Viewer](https://sites.google.com/u/0/d/1xKJ0wBSr69I8lvvRqGGPlH0U5YtTZJ8_/p/1Fa7npFgAtOL7EKl0-Juti9hs9Htd9XFm/preview) .
