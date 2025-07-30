@@ -18,14 +18,28 @@
 
 package fileUtil
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // ###########################################
 func Header() {
+	version := softVersion()
 	fmt.Println("")
-	fmt.Println("   ┌─────────────────────────────────────┐") // unicode U+250C
-	fmt.Println("   │ Single-Cell Scorer (c)Frederic PONT │")
-	fmt.Println("   │ 2018-2025 - Free Software GNU GPL   │")
-	fmt.Println("   └─────────────────────────────────────┘")
+	fmt.Println("   ┌──────────────────────────────────────────┐") // unicode U+250C
+	fmt.Println("   │ Single-Cell Signature Scorer v" + version + " │")
+	fmt.Println("   │             (c)Frederic PONT             │")
+	fmt.Println("   │   2018-2025 - Free Software GNU GPL      │")
+	fmt.Println("   └──────────────────────────────────────────┘")
 	//fmt.Println("")
+}
+
+func softVersion() string {
+	// Get the current date and time
+	now := time.Now()
+
+	// Format the date as "YYYY-MM-DD"
+	formattedDate := now.Format("2006-01-02")
+	return formattedDate
 }

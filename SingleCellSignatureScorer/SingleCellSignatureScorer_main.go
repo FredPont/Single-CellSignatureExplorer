@@ -17,58 +17,64 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"runtime"
+	_ "net/http/pprof"
 	"scorer/src/fileUtil"
 	"time"
+
+	"github.com/schollz/progressbar/v3"
 )
 
 func main() {
-	// read cmb line arguments
-	cmdlineDB := flag.String("db", "", "databases number selected by user in command line : for example 0-4,6-12")
-	flag.Parse()
 
-	conf := fileUtil.ReadConfig() // read json config file
-	if conf.Server == 0 {
-		fileUtil.Header()
-	} else if *cmdlineDB != "" {
-		conf.DBserver = *cmdlineDB // priority is given to cmd line database to json file databases
-	}
+	// start the profiling server
+	// go func() {
+	// 	fmt.Println(http.ListenAndServe("localhost:6060", nil))
+	// }()
 
-	//
+	fileUtil.Config = fileUtil.InitializeConfig()
+
+	// read configuration from JSON file
+	fileUtil.Config = fileUtil.ReadConfig()
+
+	// Apply command line parameters, switch between server and client mode
+	fileUtil.ApplyCommandLineParams(&fileUtil.Config)
+
+	// read all databases names
 	allDBnames := fileUtil.ListFiles("databases/")
+	// read all data files names
 	dataFileNames := fileUtil.ListFiles("data/")
-	nbCPU := runtime.NumCPU()
-	fmt.Println("   ", nbCPU, "CPUs detected")
 
-	var DBnames []string
-	if conf.Server == 0 {
-		fileUtil.DisplayDB(allDBnames)          // display databases
-		DBnames = fileUtil.Criteria(allDBnames) // user select databases
-	} else {
-		DBnames = fileUtil.ServerDB(conf, allDBnames)
-	}
+	// Display configuration
+	fileUtil.ConfigSummary(fileUtil.Config)
 
+	// Select databases to use
+	DBnames := fileUtil.SelectDatabases(fileUtil.Config, allDBnames)
+
+	// Display databases to use
+	fmt.Println("Selected Databases:", DBnames)
 	totalCalc := len(DBnames) * len(dataFileNames)
 	count := 0
 	t0 := time.Now()
 
 	// for each database
+	bar := progressbar.New(len(DBnames) * len(dataFileNames))
 	for _, db := range DBnames {
-		dataBase := fileUtil.ReadDB("databases/" + db + "/")
+		fileUtil.Config.DataBase = fileUtil.ReadDB("databases/" + db + "/")
 		// for each data file
 		for _, dataFile := range dataFileNames {
+
 			count++
 			fmt.Println("\n", count, "/", totalCalc, " File: ", dataFile, " DB: ", db)
 
-			//allPW := make(map[idPW]float64, 0) // cell name + pathway -> []scores
-			allPW, allCellNames := fileUtil.ReadTable("data/"+dataFile, dataBase, nbCPU, conf)
+			fileUtil.CreateResultFile(db, dataFile) // create the result file
 
-			resFile := "results/" + db + "_" + dataFile
-			fmt.Println("\n        Write:", resFile)
-			fileUtil.WriteResults(resFile, allCellNames, allPW)
+			fileUtil.ReadMatrix("data/" + dataFile) // read the data matrix
+
+			fileUtil.MetaDataSummary(db, dataFile) // write the metadata in a json file
+			bar.Add(1)                             // show progress bar
 		}
+		fileUtil.CloseResultFile()
 	}
 	fmt.Println("Finished !")
 	fmt.Printf("Elapsed time : %v.\n", time.Since(t0))

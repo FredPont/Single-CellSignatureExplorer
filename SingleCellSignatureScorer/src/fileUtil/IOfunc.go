@@ -23,20 +23,12 @@ import (
 	"bytes"
 	"encoding/csv"
 	"io"
-	"io/ioutil"
 	"math"
 	"os"
 	"path/filepath"
-	"sort"
 	"strconv"
 	"strings"
 )
-
-// idPW used as key in map idPW -> pathway score
-type idPW struct {
-	cellN string // cell name
-	pwN   string // pathway name
-}
 
 //###########################################
 
@@ -52,7 +44,7 @@ func check(e error) {
 
 func ListFiles(path string) []string {
 	var fileSlice []string
-	files, _ := ioutil.ReadDir(path)
+	files, _ := os.ReadDir(path)
 	for _, f := range files {
 		file := f.Name()
 		fileSlice = append(fileSlice, file)
@@ -138,12 +130,14 @@ func ReadDB(path string) map[string][]string {
 	dataBase := make(map[string][]string, 0) // pathway name -> genes
 	// read DB files
 	files, _ := os.ReadDir(path)
-
+	pathwayNames := make([]string, 0, len(files))
 	for _, f := range files {
 		file := f.Name()
+		pathwayNames = append(pathwayNames, file)
 		pwSlice := readPW(path + file)
 		dataBase[file] = pwSlice
 	}
+	Config.PathwayNames = pathwayNames
 	return dataBase
 }
 
@@ -165,44 +159,31 @@ func uniqueStrings(input []string) []string {
 
 // slice intersection that remove "-" temporarly the signe - in the database genenames
 // caution it is not a symetrical function, the sign - MUST be in the slice b, NEVER in a
-func intersectionNeg(a, b []string) (c []string) {
-	m := make(map[string]bool, len(a))
-	negSign := false
+// func intersectionNeg(a, b []string) (c []string) {
+// 	m := make(map[string]bool, len(a))
+// 	negSign := false
 
-	for _, item := range a {
-		m[item] = true
-	}
+// 	for _, item := range a {
+// 		m[item] = true
+// 	}
 
-	for _, item := range b {
+// 	for _, item := range b {
 
-		if item[:1] == "-" { // if sign "-" is detected , the genes is append in the intersection list with a sign "-"
-			item = item[1:]
-			negSign = true
-		}
-		if _, ok := m[item]; ok {
-			if negSign == true {
-				c = append(c, "-"+item)
-			} else {
-				c = append(c, item)
-			}
-		}
-		negSign = false
-	}
-	return
-}
-
-// return all pathway names in map[idPW]
-func mapKeysPWid(mymap map[idPW]float64) []string {
-	keys := make([]string, len(mymap))
-	i := 0
-	for k := range mymap {
-		keys[i] = k.pwN
-		i++
-	}
-	keys = uniqueStrings(keys)
-	sort.Strings(keys)
-	return keys
-}
+// 		if item[:1] == "-" { // if sign "-" is detected , the genes is append in the intersection list with a sign "-"
+// 			item = item[1:]
+// 			negSign = true
+// 		}
+// 		if _, ok := m[item]; ok {
+// 			if negSign == true {
+// 				c = append(c, "-"+item)
+// 			} else {
+// 				c = append(c, item)
+// 			}
+// 		}
+// 		negSign = false
+// 	}
+// 	return
+// }
 
 // sum of floats in slice
 func sliceSum(s []float64) float64 {
@@ -212,6 +193,24 @@ func sliceSum(s []float64) float64 {
 	}
 	return sum
 
+}
+
+// sum of floats in slice
+func mapSum(rowData map[int]float64) float64 {
+	sum := 0.0
+	for _, value := range rowData {
+		sum += value
+	}
+	return sum
+}
+
+// get all keys of a map
+func getKeys(rowData map[int]float64) []int {
+	keys := make([]int, 0, len(rowData))
+	for key := range rowData {
+		keys = append(keys, key)
+	}
+	return keys
 }
 
 // []float64 -> []string
@@ -228,21 +227,21 @@ func floatStoStringS(a []float64) []string {
 }
 
 // remove genes with expression = 0
-func cleanZero(colNames, geneValues []string) ([]string, []float64) {
-	var geneNames []string
-	var genesExpress []float64
+// func cleanZero(colNames, geneValues []string) ([]string, []float64) {
+// 	var geneNames []string
+// 	var genesExpress []float64
 
-	for i, s := range geneValues {
-		v, err := strconv.ParseFloat(s, 64)
-		check(err)
-		if v > 0 {
-			geneNames = append(geneNames, string(colNames[i]))
-			genesExpress = append(genesExpress, v)
-		}
-	}
+// 	for i, s := range geneValues {
+// 		v, err := strconv.ParseFloat(s, 64)
+// 		check(err)
+// 		if v > 0 {
+// 			geneNames = append(geneNames, string(colNames[i]))
+// 			genesExpress = append(genesExpress, v)
+// 		}
+// 	}
 
-	return geneNames, genesExpress
-}
+// 	return geneNames, genesExpress
+// }
 
 // remove log2 transformation
 func unLog2(log2 []float64) []float64 {
@@ -251,4 +250,38 @@ func unLog2(log2 []float64) []float64 {
 		noLog2 = append(noLog2, math.Pow(2, i))
 	}
 	return noLog2
+}
+
+// remove log2 transformation in a map
+func unlog2Map(rowData map[int]float64) map[int]float64 {
+	// Créer une nouvelle map pour stocker les résultats
+	result := make(map[int]float64)
+
+	// Parcourir chaque valeur dans la map
+	for key, value := range rowData {
+		// Appliquer l'exponentielle base 2 pour retirer le logarithme base 2
+		result[key] = math.Exp2(value)
+	}
+
+	return result
+}
+
+// remove log2 transformation in a sparse matrix
+func unlog2Sparse(data map[int]map[int]float64) map[int]map[int]float64 {
+	// create a new map for storing the results
+	result := make(map[int]map[int]float64)
+
+	// loop through each inner map in the main map
+	for i, innerMap := range data {
+		// initialize a new inner map for storing the results
+		result[i] = make(map[int]float64)
+
+		// loop through each value in the inner map
+		for j, value := range innerMap {
+			// apply the exponential base 2 to remove the log2 transformation
+			result[i][j] = math.Exp2(value)
+		}
+	}
+
+	return result
 }

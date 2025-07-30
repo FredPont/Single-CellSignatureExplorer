@@ -1,0 +1,5 @@
+18S rRNA
+28S rRNA
+5.8S rRNA
+5S rRNA
+AAAS

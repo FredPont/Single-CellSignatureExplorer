@@ -1,7 +1,11 @@
 {
     "removeLog2": 1,
     "server": 0,
-    "DBserver": "0"
+    "DBserver": "0",
+    "scoreAlgo": "sum",
+    "ChunkSize": 1000,
+    "ChunkInParallel": 2,
+    "NbCPU": 1
 }
 
 

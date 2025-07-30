@@ -27,7 +27,7 @@ If you enjoy using Single-Cell Signature Explorer and find it useful, then pleas
 ![NAR](doc/images/NAR.jpg)
 
 # Features 
-+ High throughput scores computation (see fig 2-3)
++ High throughput scores computation further improved in 2025 (see fig 2-3)
 
 + Scores can be computed on a basic computer or a supercomputer as well (see benchmark fig 2 and 3)
 
@@ -39,7 +39,7 @@ If you enjoy using Single-Cell Signature Explorer and find it useful, then pleas
 
 + Already automated for thousands of pathways 
 
-+ Ready to use pathway [database](https://sites.google.com/site/fredsoftwares/products/databases) with >35,000 human pathways
++ Ready to use pathway [database](https://sites.google.com/site/fredsoftwares/products/databases) with >39,000 human pathways
 
 + Easy use of custom pathways (see doc)
 
@@ -54,11 +54,14 @@ If you enjoy using Single-Cell Signature Explorer and find it useful, then pleas
 ![MAP](doc/images/map.jpg)
 Figure 1.  KEGG Signature "Antigen Processing and Presentation" (89 genes) displayed on a t-SNE plot of 13,500 human peripheral blood mononuclear cells by Single-Cell Signature Viewer.
 
-![BENCH](doc/images/scorer_benchmark.png)
-Figure 2. In this benchmark, Single Cell Signature Scorer achieve 8 million scores / min on a dual Xeon Gold CPU. The new low memory scorer is almost as fast (6.74 million scores / min) and consume less than 3 Go RAM.
+![BENCH](doc/images/scorer2025_benchmark01.png)
+Figure 2. This benchmark shows the improvements of Single Cell Signature Scorer version 2025-07-30 compared to previous version.
+
+![BENCH](doc/images/scorer2025_benchmark02.png)
+Figure 3. Single Cell Signature Scorer version 2025-07-30 can compute the scores of 2700 signatures for 1 million cells in less than 30 min with less than 4 GB memory.
 
 ![ELIFE](doc/images/elife.jpg)
-Figure 3.  Single Cell Signature Explorer (in red SCSE) computes enrichment score at very high throughput (A) and low memory usage (B) while maintaining a good concordance with competitors.  (Noureen et al. eLife 2022;11:e71994.  DOI: https://​doi.​org/​10.​7554/​eLife.​71994)
+Figure 4.  Single Cell Signature Explorer (in red SCSE) computes enrichment score at very high throughput (A) and low memory usage (B) while maintaining a good concordance with competitors.  (Noureen et al. eLife 2022;11:e71994.  DOI: https://​doi.​org/​10.​7554/​eLife.​71994)
 
 ![spatial](doc/images/spatial1.png)
 ![spatial](doc/images/spatial3.png)
