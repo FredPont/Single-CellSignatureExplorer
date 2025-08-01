@@ -1,7 +1,7 @@
 
 # Single-Cell Signature Explorer
 
-2025-07-30 : **New** !  Major update of the signature Scorer (see Benchmarks and doc)
+2025-07-30 : **New** !  Major update of the signature Scorer, memory usage and speed have been greatly improved (see Benchmarks and doc)
 
 see also this [page](https://sites.google.com/site/fredsoftwares/products/single-cell-signature-explorer)
 
