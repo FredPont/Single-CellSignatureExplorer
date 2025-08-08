@@ -60,6 +60,7 @@ Figure 1.  KEGG Signature "Antigen Processing and Presentation" (89 genes) displ
 Figure 2. This benchmark shows the improvements of Single Cell Signature Scorer version 2025-07-30 compared to previous version.
 
 ![BENCH](doc/images/scorer2025_benchmark02.png)
+
 Figure 3. Single Cell Signature Scorer version 2025-07-30 can compute the scores of 2700 signatures for 1 million cells in less than 30 min with less than 4 GB memory.
 
 ![ELIFE](doc/images/elife.jpg)
@@ -67,6 +68,8 @@ Figure 4.  Single Cell Signature Explorer (in red SCSE) computes enrichment scor
 
 ![spatial](doc/images/spatial1.png)
 ![spatial](doc/images/spatial3.png)
+![spatial](doc/images/Antigen_Pres.png)
+![spatial](doc/images/Mapk.png)
 Figure 4. Single-Cell Signature Explorer is compatible with [Single-Cell Spatial Explorer](https://github.com/FredPont/spatial). For an easier coordinates to pixel position conversion you can use [Spatial Background Builder](https://github.com/FredPont/Spatial_Background_Builder) .
 
 # Known issues
