@@ -69,7 +69,7 @@ Figure 4.  Single Cell Signature Explorer (in red SCSE) computes enrichment scor
 ![spatial](doc/images/spatial1.png)
 ![spatial](doc/images/spatial3.png)
 ![spatial](doc/images/Antigen_Pres.png)
-![spatial](doc/images/Mapk.png)
+![spatial](doc/images/Mapk_inferno.png)
 Figure 4. Single-Cell Signature Explorer is compatible with [Single-Cell Spatial Explorer](https://github.com/FredPont/spatial). For an easier coordinates to pixel position conversion you can use [Spatial Background Builder](https://github.com/FredPont/Spatial_Background_Builder) .
 
 # Known issues
