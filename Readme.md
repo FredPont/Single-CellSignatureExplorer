@@ -66,10 +66,11 @@ Figure 3. Single Cell Signature Scorer version 2025-07-30 can compute the scores
 ![ELIFE](doc/images/elife.jpg)
 Figure 4.  Single Cell Signature Explorer (in red SCSE) computes enrichment score at very high throughput (A) and low memory usage (B) while maintaining a good concordance with competitors.  (Noureen et al. eLife 2022;11:e71994.  DOI: https://​doi.​org/​10.​7554/​eLife.​71994)
 
-![spatial](doc/images/spatial1.png)
-![spatial](doc/images/spatial3.png)
+
 ![spatial](doc/images/Antigen_Pres.png)
 ![spatial](doc/images/Mapk_inferno.png)
+![spatial](doc/images/spatial1.png)
+![spatial](doc/images/spatial3.png)
 Figure 4. Single-Cell Signature Explorer is compatible with [Single-Cell Spatial Explorer](https://github.com/FredPont/spatial). For an easier coordinates to pixel position conversion you can use [Spatial Background Builder](https://github.com/FredPont/Spatial_Background_Builder) .
 
 # Known issues
