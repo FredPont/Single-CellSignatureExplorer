@@ -33,6 +33,8 @@ If you enjoy using Single-Cell Signature Explorer and find it useful, then pleas
 
 + Scores can be computed on a basic computer or a supercomputer as well (see benchmark fig 2 and 3)
 
++ **New** ! A metadata JSON file is produced for each analysis for better data management
+
 + Work out of the box : no installation for the scorer and the merger developed using a high performance compiled programming language.
 
 + Conda environment  and [video](https://www.youtube.com/watch?v=cnFc_NJBfzo) for easy installation of the Viewer/Combiner
