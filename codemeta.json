@@ -1,0 +1,51 @@
+{
+    "@context": "https://w3id.org/codemeta/3.0",
+    "type": "SoftwareSourceCode",
+    "applicationCategory": "Biology",
+    "author": [
+        {
+            "id": "https://orcid.org/0000-0002-5493-527X",
+            "type": "Person",
+            "affiliation": {
+                "type": "Organization",
+                "name": "CRCT Toulouse, France"
+            },
+            "email": "frederic.pont@inserm.fr",
+            "familyName": "PONT",
+            "givenName": "Frédéric"
+        }
+    ],
+    "codeRepository": "https://github.com/FredPont/Single-CellSignatureExplorer",
+    "dateCreated": "2018-11-18",
+    "dateModified": "2025-07-30",
+    "datePublished": "2019-12-14",
+    "description": "Single-Cell Signature Explorer is a package of four softwares dedicated to high throughput signature exploration in single-cell RNAseq analysis.",
+    "downloadUrl": "https://github.com/FredPont/Single-CellSignatureExplorer/releases/tag/v20250730",
+    "funder": {
+        "type": "Organization",
+        "name": "INSERM"
+    },
+    "identifier": "https://archive.softwareheritage.org/swh:1:dir:951972b83786876d7c711a317fe34fb01d3a524a;origin=https://github.com/FredPont/Single-CellSignatureExplorer;visit=swh:1:snp:6261cd3ebdf32667cdb99c6c40315adc7ed61048;anchor=swh:1:rev:72e18d7e4b4087db7c15d51cb8e5fa4b8d83a3f5",
+    "keywords": [
+        "single-cell RNAseq",
+        "pathways",
+        "visualisation"
+    ],
+    "license": "https://spdx.org/licenses/GPL-3.0",
+    "name": "Single-Cell Signature Explorer",
+    "operatingSystem": [
+        "Linux",
+        "Windows",
+        "MacOS"
+    ],
+    "programmingLanguage": [
+        "Go",
+        "R"
+    ],
+    "releaseNotes": "Major release of the scorer version 2025-07-30 Beta\nHuge speed increase\nLow RAM\nTwo scores : sum and sum normalized by the gene set size (see doc)\nCompiled with go version go1.24.5 (scorer and merger are ready to use)",
+    "softwareRequirements": "https://www.r-project.org",
+    "version": "20250730",
+    "developmentStatus": "active",
+    "issueTracker": "https://github.com/FredPont/Single-CellSignatureExplorer/issues",
+    "referencePublication": "https://doi.org/10.1093/nar/gkz601"
+}
