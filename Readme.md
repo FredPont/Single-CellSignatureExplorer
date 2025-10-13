@@ -53,7 +53,7 @@ If you enjoy using Single-Cell Signature Explorer and find it useful, then pleas
 
 + Scores manually validated and heavily tested by experienced biologists/immunologists on a large amount of data using antibodies, purified cells. (see publication supp data)
 
-+ Step-by-step documentation[Manual](https://github.com/FredPont/Single-CellSignatureExplorer/blob/main/doc/2025-07-30_Manual_Single_Cell_Signature_Explorer.pdf)of 17 pages, continuously improved to cover the user's questions. 
++ Step-by-step [Manual](https://github.com/FredPont/Single-CellSignatureExplorer/blob/main/doc/2025-07-30_Manual_Single_Cell_Signature_Explorer.pdf)of 17 pages, continuously improved to cover the user's questions. 
 
 ![MAP](doc/images/map.jpg)
 Figure 1.  KEGG Signature "Antigen Processing and Presentation" (89 genes) displayed on a t-SNE plot of 13,500 human peripheral blood mononuclear cells by Single-Cell Signature Viewer.
