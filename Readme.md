@@ -103,3 +103,6 @@ and then open the URL manually in the web browser
 2- The maximum number of item that a drop down list can display is limited. This limit is dependent on the browser, and browser version.  For example in Firefox a large list can disappears.  In this case, try to use google chrome or split the table. This can be done using some tools in this website, for example ”Select columns in table”.
 
 3- In some linux distributions the Cairo R pakcage, used by the viewer/combiner, is difficult to install. A solution in this post . We recommend to use the conda environment available in the software zip archive to install the needed R packages automatically. 
+
+# Acknowledgments
+This work was granted access to the HPC resources of CALMIP supercomputing center under the allocation 2019-P19043.
